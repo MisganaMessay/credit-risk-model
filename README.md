@@ -1,40 +1,108 @@
 # Credit Risk Probability Model for Alternative Data
 
-## Project Overview
+## 📋 Project Overview
+This project is part of a partnership between **Bati Bank** and a leading eCommerce platform to enable a **Buy-Now-Pay-Later (BNPL)** service. As an Analytics Engineer, the goal is to build a high-performance, Basel II-compliant credit scoring model that predicts the probability of default for customers using alternative transaction data.
 
-This project develops an end-to-end credit risk scoring system for Bati Bank using transaction data from the Xente eCommerce platform. The objective is to build a machine learning solution that predicts customer credit risk using alternative behavioral data.
-
-Since the dataset does not contain actual loan default labels, a proxy target variable will be engineered using customer behavioral patterns derived from Recency, Frequency, and Monetary (RFM) analysis.
-
-The final solution will include feature engineering, risk modeling, model deployment through a REST API, and automated CI/CD workflows.
+Since the raw dataset does not contain historical default labels, this project involves engineering a **proxy risk variable** using behavioral patterns (RFM analysis) to categorize users as high-risk or low-risk.
 
 ---
 
-# Credit Scoring Business Understanding
+## 🏛️ Business Understanding (Basel II & Regulatory Context)
 
-## How does the Basel II Accord's emphasis on risk measurement influence the need for an interpretable and well-documented model?
+In a regulated financial environment, this model adheres to the following principles:
 
-The Basel II Accord emphasizes accurate risk measurement, transparency, and regulatory compliance. Credit scoring models used by financial institutions must therefore be interpretable and properly documented. An interpretable model allows risk managers, auditors, and regulators to understand how risk predictions are generated and verify that lending decisions are fair and consistent.
+- **Basel II Accord Alignment:** We prioritize model interpretability and thorough documentation to meet regulatory expectations for risk measurement and capital adequacy.
+- **Proxy Target Variable:** Without a direct "default" label, we utilize **Recency, Frequency, and Monetary (RFM)** patterns to identify disengaged or low-value customers as a proxy for credit risk.
+- **Model Trade-offs:** While complex models (like Gradient Boosting) offer higher accuracy, we compare them against simpler, interpretable models (like Logistic Regression with WoE) to ensure the bank can justify credit decisions to regulators and customers.
 
-Well-documented models support governance, validation, monitoring, and reproducibility. For Bati Bank, compliance with Basel II requires that model assumptions, feature engineering decisions, and evaluation procedures be clearly documented and justified.
+---
 
-## Without a direct default label, why is a proxy variable necessary, and what business risks does proxy-based prediction introduce?
+## 📊 Data Source
 
-The Xente transaction dataset does not contain information indicating whether customers repaid or defaulted on loans. Because supervised machine learning models require labeled examples, a proxy target variable must be created.
+The dataset consists of transaction-level records from the **Xente eCommerce platform**.
 
-This project will use customer behavioral patterns derived from Recency, Frequency, and Monetary (RFM) metrics to identify customer segments that may represent higher credit risk. Customers belonging to the least engaged segment will be labeled as high-risk.
+- **Official Dataset:** https://www.kaggle.com/c/xente-challenge  
+- **Details:** The data captures the 'who' (CustomerId), 'what' (ProductCategory), and 'how much/when' (Amount, TransactionStartTime) for over 95,000 transactions.
 
-However, proxy variables are assumptions rather than actual default outcomes. Some customers labeled as high-risk may never default, while some low-risk customers may eventually default. This introduces risks such as misclassification, biased decisions, and reduced predictive accuracy. Therefore, proxy-based predictions should be interpreted carefully and continuously monitored.
+---
 
-## What are the key trade-offs between a simple interpretable model and a high-performance model in a regulated financial context?
+## 🛠️ Project Structure
 
-Logistic Regression combined with Weight of Evidence (WoE) transformation offers strong interpretability and is widely used in traditional credit scoring. The contribution of each variable can be easily explained to regulators and business stakeholders.
+```text
+credit-risk-model/
+├── .github/workflows/ci.yml
+├── data/
+│   ├── raw/
+│   └── processed/
+├── notebooks/
+│   └── eda.ipynb
+├── src/
+│   ├── data_processing.py
+│   ├── train.py
+│   └── api/
+├── tests/
+├── Dockerfile
+├── requirements.txt
+└── README.md
+```
 
-Gradient Boosting models often provide superior predictive performance because they can capture complex nonlinear relationships and feature interactions. However, they are more difficult to interpret and validate.
+---
 
-In regulated financial environments, organizations must balance predictive performance with transparency, explainability, and regulatory compliance. The final model choice should consider both business objectives and governance requirements.
-=======
-# credit-risk-model
-Credit Risk Probability Model for Alternative Data
->>>>>>> 71b1aaf677add65ec95021db58585137729bf425
+## ⚙️ Setup Instructions
 
+Follow these steps to set up and run the project locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/MisganaMessay/credit-risk-model.git
+cd credit-risk-model
+```
+
+### 2. Create Virtual Environment
+```bash
+python -m venv venv
+```
+
+### 3. Activate Virtual Environment
+
+**Windows**
+```bash
+venv\Scripts\activate
+```
+
+**macOS/Linux**
+```bash
+source venv/bin/activate
+```
+
+### 4. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run Jupyter Notebook (Optional)
+```bash
+jupyter notebook
+```
+
+---
+
+## 📈 Key Insights from Exploratory Data Analysis (EDA)
+
+From the initial analysis of the transaction dataset, the following patterns were observed:
+
+- **Extreme Skewness:** Transaction Amount and Value are highly right-skewed, with significant outliers (up to very large values). This suggests the need for robust scaling or transformation techniques (e.g., log transformation).
+
+- **Category Dominance:** A small number of categories dominate the dataset, with over 90% of transactions concentrated in *airtime* and *financial_services*.
+
+- **Feature Redundancy:** There is a very high correlation (≈ 0.99) between *Amount* and *Value*, suggesting that one feature may be removed to avoid multicollinearity.
+
+- **Channel Behavior Patterns:** *ChannelId_3* accounts for the majority of transaction volume.
+
+- **Customer Behavior Insight:** Transaction patterns show clear differences in user activity levels, useful for RFM-based segmentation and proxy risk labeling.
+
+---
+
+## ⚖️ License
+
+This project is for educational purposes as part of the 10 Academy AI Mastery program.
