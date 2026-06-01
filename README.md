@@ -107,4 +107,12 @@ From the initial analysis of the transaction dataset, the following patterns wer
 
 ## ⚖️ License
 
+## 🐳 Deployment Guide (Docker)
+
+To build and run the API locally using Docker, follow these steps:
+
+1. **Build the Image:**
+   ```bash
+   docker build -t credit-risk-api .
+
 This project is for educational purposes as part of the 10 Academy AI Mastery program.

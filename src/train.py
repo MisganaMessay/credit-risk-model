@@ -65,3 +65,15 @@ def train_and_track():
 
 if __name__ == "__main__":
     train_and_track()
+    # ... (your existing metrics logging code) ...
+
+            # Log and Register the model
+            if name == "Logistic_Regression": # We pick this as our "Champion"
+                mlflow.sklearn.log_model(
+                    sk_model=model,
+                    artifact_path="model",
+                    registered_model_name="CreditRiskChampion" # THIS IS THE KEY LINE
+                )
+                print(f"Successfully registered {name} as 'CreditRiskChampion' in MLflow.")
+            else:
+                mlflow.sklearn.log_model(model, name)
