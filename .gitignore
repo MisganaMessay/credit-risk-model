@@ -1,4 +1,8 @@
 venv/
+.env
 __pycache__/
 *.pyc
-.env
+data/raw/
+mlruns/
+mlflow.db
+.ipynb_checkpoints/
