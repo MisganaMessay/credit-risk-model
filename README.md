@@ -37,3 +37,4 @@ In regulated financial environments, organizations must balance predictive perfo
 # credit-risk-model
 Credit Risk Probability Model for Alternative Data
 >>>>>>> 71b1aaf677add65ec95021db58585137729bf425
+
