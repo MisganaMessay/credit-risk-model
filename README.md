@@ -33,3 +33,7 @@ Logistic Regression combined with Weight of Evidence (WoE) transformation offers
 Gradient Boosting models often provide superior predictive performance because they can capture complex nonlinear relationships and feature interactions. However, they are more difficult to interpret and validate.
 
 In regulated financial environments, organizations must balance predictive performance with transparency, explainability, and regulatory compliance. The final model choice should consider both business objectives and governance requirements.
+=======
+# credit-risk-model
+Credit Risk Probability Model for Alternative Data
+>>>>>>> 71b1aaf677add65ec95021db58585137729bf425
