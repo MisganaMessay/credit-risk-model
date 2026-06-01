@@ -101,6 +101,8 @@ From the initial analysis of the transaction dataset, the following patterns wer
 
 - **Customer Behavior Insight:** Transaction patterns show clear differences in user activity levels, useful for RFM-based segmentation and proxy risk labeling.
 
+5. **Imputation Strategy:** Designed a robust missing-data plan using Median Imputation for skewed numerical features and Mode Imputation for categorical features to ensure production pipeline stability.
+
 ---
 
 ## ⚖️ License
