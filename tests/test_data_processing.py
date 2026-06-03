@@ -1,6 +1,5 @@
 import pytest
 import pandas as pd
-import numpy as np
 from src.data_processing import DateFeatureExtractor
 
 def test_date_feature_extraction():
